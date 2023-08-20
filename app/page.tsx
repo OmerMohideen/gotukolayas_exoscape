@@ -15,6 +15,7 @@ import ChooseSeatPage from "./components/pages/ChooseSeatPage";
 import BookConfirmationPage from "./components/pages/BookConfirmationPage";
 import PaymentPage from "./components/pages/PaymentPage";
 import BookingPassPage from "./components/pages/BookingPassPage";
+import { AuthContextProvider } from "./contexts";
 
 export interface pageProps {
   page?: string;
@@ -34,21 +35,24 @@ export default function Home() {
     [STATES.DASHBOARD]: <DashboardPage setPage={setPage} />,
     [STATES.REGISTER]: <RegisterPage setPage={setPage} />,
     [STATES.LOGIN]: <LoginPage setPage={setPage} />,
-	[STATES.BOOK]: <BookPage setPage={setPage} setAvailable={setAvailble}/>,
-	[STATES.LIST]: <ListPage setPage={setPage}/>,
-	[STATES.PROFILE]: <ProfilePage setPage={setPage}/>,
-	  [STATES.AVAILABLE]: <AvailableShipsPage setAvailable={setAvailble} setPage={setPage} from={available[0]} to={available[1]}/>,
-	  [STATES.SEAT]: <ChooseSeatPage/>,
-	  [STATES.CONFIRM]: <BookConfirmationPage available={available} setPage={setPage}/>,
-	  [STATES.PAYMENT]: <PaymentPage setPage={setPage}/>,
-	  [STATES.PASS]: <BookingPassPage setPage={setPage}/>
+    [STATES.BOOK]: <BookPage setPage={setPage} setAvailable={setAvailble} />,
+    [STATES.LIST]: <ListPage setPage={setPage} />,
+    [STATES.PROFILE]: <ProfilePage setPage={setPage} />,
+    [STATES.AVAILABLE]: <AvailableShipsPage setAvailable={setAvailble} setPage={setPage} from={available[0]} to={available[1]} />,
+    [STATES.SEAT]: <ChooseSeatPage />,
+    [STATES.CONFIRM]: <BookConfirmationPage available={available} setPage={setPage} />,
+    [STATES.PAYMENT]: <PaymentPage setPage={setPage} />,
+    [STATES.PASS]: <BookingPassPage setPage={setPage} />
   };
+
   return (
-    <main>
-      <div className="sm:max-w-[650px] sm:w-[100%] sm:m-auto">
-        {pages[page]}
-        <NavigationBarTemplate page={page} setPage={setPage} />
-      </div>
-    </main>
+    <AuthContextProvider>
+      <main>
+        <div className="sm:max-w-[650px] sm:w-[100%] sm:m-auto">
+          {pages[page]}
+          <NavigationBarTemplate page={page} setPage={setPage} />
+        </div>
+      </main>
+    </AuthContextProvider>
   );
 }

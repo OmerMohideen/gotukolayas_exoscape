@@ -22,7 +22,8 @@ export default function BookConfirmationPage({ available, setPage }: bookConfirm
         label="Book Confirmation"
         onClick={() => {
           setPage(STATES.AVAILABLE);
-        }}
+		}}
+		color="white"
       />
 	  <FormTemplate onSubmit={handleSubmit}>
 		  <div className="flex gap-4 w-full sm:max-w-sm justify-between font-medium text-[16px] mb-10">

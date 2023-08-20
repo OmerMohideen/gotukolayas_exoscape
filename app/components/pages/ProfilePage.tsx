@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import VerticalTab from "../organism/VerticalTab";
 import Text from "../molecules/Text";
 import BackButton from "../molecules/BackButton";
@@ -13,8 +13,12 @@ import ProfileIcon from "../atoms/icons/ProfileIcon";
 import LockIcon from "../atoms/icons/LockIcon";
 import ImageIcon from "../atoms/icons/ImageIcon";
 import InfoSquareIcon from "../atoms/icons/InfoSquareIcon";
+import { logout } from "@/app/firebase/authentication";
+import { AuthContext } from "@/app/contexts";
 
 function ProfilePage({ setPage }: pageProps) {
+  const { setUser } = useContext(AuthContext);
+
   return (
     <div className="w-full sm:max-w-sm mx-auto">
       <div className="mx-[20px] h-screen py-[20px]">
@@ -32,8 +36,8 @@ function ProfilePage({ setPage }: pageProps) {
               alt="Profile picture"
               width={122}
               height={122}
-			  className="rounded-3xl"
-			  loading="lazy"
+              className="rounded-3xl"
+              loading="lazy"
             />
             <Text className="font-medium text-[24px]" label="Anatoly" />
           </div>
@@ -82,6 +86,11 @@ function ProfilePage({ setPage }: pageProps) {
               label="Logout"
               position="left"
               icon={<LogoutIcon />}
+              onClick={() => {
+                logout();
+                setUser?.(undefined);
+                setPage(STATES.LOAD)
+              }}
             />
           </div>
         </div>
