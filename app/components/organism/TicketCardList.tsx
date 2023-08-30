@@ -1,7 +1,7 @@
 import { Ticket } from "@/app/types";
 import TicketCard from "../molecules/TicketCard";
 
-export default function TicketCardList({onClick}) {
+export default function TicketCardList({onClick: any}) {
   const ticketList: Ticket[] = [
     {
       id: 1203,
